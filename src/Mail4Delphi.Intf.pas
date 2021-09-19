@@ -10,6 +10,8 @@ uses
 {$ENDIF}
 
 type
+  TMakeBody = reference to function: string;
+
   IMail = interface
     ['{A63918AD-EA2C-4CB9-98C5-90C3BAB95144}']
     function AddTo(const AMail: string; const AName: string = ''): IMail;
@@ -19,7 +21,8 @@ type
     function AddReplyTo(const AMail: string; const AName: string = ''): IMail;
     function AddCC(const AMail: string; const AName: string = ''): IMail;
     function AddBCC(const AMail: string; const AName: string = ''): IMail;
-    function AddBody(const ABody: string): IMail;
+    function AddBody(const ABody: string): IMail; overload;
+    function AddBody(const AMakeBody: TMakeBody): IMail; overload;
     function ClearBody: IMail;
     function ClearAttachments: IMail;
     function Host(const AHost: string): IMail;
